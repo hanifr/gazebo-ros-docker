@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
 <robot name="simple_robot">
-  <!-- Base Link -->
   <link name="base_link">
     <visual>
       <geometry>

@@ -52,6 +52,60 @@ docker-compose exec ros bash -c "cat > /catkin_ws/src/my_robot_description/urdf/
 </robot>
 EOL"
 
+echo "📦 Creating package files..."
+# Create package files for my_robot_description
+docker-compose exec ros bash -c "mkdir -p /catkin_ws/src/my_robot_description/launch && \
+cat > /catkin_ws/src/my_robot_description/package.xml << 'EOL'
+<?xml version=\"1.0\"?>
+<package format=\"2\">
+  <name>my_robot_description</name>
+  <version>0.0.1</version>
+  <description>Robot description package</description>
+  <maintainer email=\"user@example.com\">Your Name</maintainer>
+  <license>TODO</license>
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>urdf</depend>
+  <depend>xacro</depend>
+</package>
+EOL"
+
+# Create CMakeLists.txt for the robot description
+docker-compose exec ros bash -c "cat > /catkin_ws/src/my_robot_description/CMakeLists.txt << 'EOL'
+cmake_minimum_required(VERSION 3.0.2)
+project(my_robot_description)
+find_package(catkin REQUIRED)
+catkin_package()
+EOL"
+
+# Create package files for my_robot_gazebo
+docker-compose exec ros bash -c "mkdir -p /catkin_ws/src/my_robot_gazebo/launch && \
+cat > /catkin_ws/src/my_robot_gazebo/package.xml << 'EOL'
+<?xml version=\"1.0\"?>
+<package format=\"2\">
+  <name>my_robot_gazebo</name>
+  <version>0.0.1</version>
+  <description>Robot Gazebo package</description>
+  <maintainer email=\"user@example.com\">Your Name</maintainer>
+  <license>TODO</license>
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>gazebo_ros</depend>
+  <depend>my_robot_description</depend>
+</package>
+EOL"
+
+# Create CMakeLists.txt for the Gazebo package
+docker-compose exec ros bash -c "cat > /catkin_ws/src/my_robot_gazebo/CMakeLists.txt << 'EOL'
+cmake_minimum_required(VERSION 3.0.2)
+project(my_robot_gazebo)
+find_package(catkin REQUIRED)
+catkin_package()
+EOL"
+
+# Create top-level CMakeLists.txt to fix the build
+docker-compose exec ros bash -c "cat > /catkin_ws/src/CMakeLists.txt << 'EOL'
+/opt/ros/noetic/share/catkin/cmake/toplevel.cmake
+EOL"
+
 echo "🔨 Building ROS workspace using cmake directly..."
 docker-compose exec ros bash -c "cd /catkin_ws && \
     mkdir -p build devel && \
