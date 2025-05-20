@@ -1,6 +1,5 @@
-now update this ReadME.md
 
-# gazebo-ros-docker
+# gazebo-ros-docker for Mac Users
  A simulation module in Gazebo environment using Docker ROS
 
 gazebo-ros-docker/
