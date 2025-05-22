@@ -1,7 +1,7 @@
 
 # gazebo-ros-docker for Mac Users
  A simulation module in Gazebo environment using Docker ROS
-
+```
 gazebo-ros-docker/
 ├── docker-compose.yml          # Docker configuration
 ├── models/                     # Custom Gazebo models
@@ -19,7 +19,7 @@ gazebo-ros-docker/
     ├── record_data.sh          # Record simulation data
     ├── create_viz.sh           # Create web visualization
     └── full_test.sh            # Full environment setup
-
+```
 ## Setup Instructions
 Initial Setup
 
